@@ -145,7 +145,7 @@ pipeline {
                 sh '''
                     sleep 5
 
-                    STATUS=$(curl -s -o /dev/null -w "%{http_code}" http://localhost:5000/health)
+                    STATUS=$(curl -s -o /dev/null -w %{http_code} http://172.17.0.3:5000/health)
 
                     if [ "$STATUS" != "200" ]; then
                         echo "❌ Health failed: $STATUS"
