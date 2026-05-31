@@ -4,7 +4,7 @@ pipeline {
     environment {
         DOCKER_IMAGE    = 'techstore-app'
         DOCKER_HUB_USER = 'kullanici-adi'   // değiştir
-        SONAR_HOST      = 'http://localhost:9000'
+        SONAR_HOST      = 'http://172.18.0.3:9000'
         SONAR_TOKEN     = credentials('sonar-token')
         SLACK_CHANNEL   = '#devops-techstore'
     }
@@ -75,7 +75,7 @@ pipeline {
                     -Dsonar.sources=. \
                     -Dsonar.exclusions=venv/**,tests/** \
                     -Dsonar.python.coverage.reportPaths=coverage.xml \
-                    -Dsonar.host.url=http://localhost:9000
+                    -Dsonar.host.url=http://172.18.0.3:9000
                 """
             }
         }
