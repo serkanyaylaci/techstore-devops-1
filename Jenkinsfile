@@ -181,7 +181,7 @@ pipeline {
                 message: """
 ✅ TechStore Deploy Başarılı
 • Build: #${BUILD_NUMBER}
-• Branch: ${BRANCH_NAME}
+• Branch: main
 • Commit: ${GIT_COMMIT?.take(7)}
 • URL: ${BUILD_URL}
                 """
