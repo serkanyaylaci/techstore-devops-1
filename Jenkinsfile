@@ -70,7 +70,7 @@ pipeline {
                 def scannerHome = tool 'SonarQubeScanner'
                 sh """
                     ${scannerHome}/bin/sonar-scanner \
-                    -Dsonar.projectKey=techstore \
+                    -Dsonar.projectKey=TechStore \
                     -Dsonar.projectName=TechStore \
                     -Dsonar.sources=. \
                     -Dsonar.exclusions=venv/**,tests/** \
