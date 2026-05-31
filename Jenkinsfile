@@ -64,24 +64,23 @@ pipeline {
 
         // ─────────────────────────────
         stage('SonarQube Analysis') {
-            steps {
-                withSonarQubeEnv('SonarQube') {
-                    sh '''
-                        . venv/bin/activate
-                        export PYTHONPATH=$PWD
-
-                        sonar-scanner \
-                            -Dsonar.projectKey=techstore \
-                            -Dsonar.projectName="TechStore" \
-                            -Dsonar.sources=. \
-                            -Dsonar.exclusions=venv/**,tests/** \
-                            -Dsonar.python.coverage.reportPaths=coverage.xml \
-                            -Dsonar.host.url=$SONAR_HOST \
-                            -Dsonar.login=$SONAR_TOKEN
-                    '''
-                }
+    steps {
+        withSonarQubeEnv('SonarQube') {
+            script {
+                def scannerHome = tool 'SonarQubeScanner'
+                sh """
+                    ${scannerHome}/bin/sonar-scanner \
+                    -Dsonar.projectKey=techstore \
+                    -Dsonar.projectName=TechStore \
+                    -Dsonar.sources=. \
+                    -Dsonar.exclusions=venv/**,tests/** \
+                    -Dsonar.python.coverage.reportPaths=coverage.xml \
+                    -Dsonar.host.url=http://localhost:9000
+                """
             }
         }
+    }
+}
 
         // ─────────────────────────────
         stage('Quality Gate') {
